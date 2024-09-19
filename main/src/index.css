@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap");
+
+:root {
+  --primary-color: #384b70;
+  --secondary-color: #507687;
+  --light-color: #fcfaee;
+  --danger-color: #b8001f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Teko", sans-serif;
+  font-optical-sizing: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    90deg,
+    rgba(56, 75, 112, 1) 0%,
+    rgba(80, 118, 135, 1) 49%
+  );
+}
+header {
+  font-size: 2rem;
+}
+
+main {
+  width: 500px;
+  min-width: 300px;
+  height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  margin: 5dvh 0;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+form input {
+  color: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: transparent;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+form input:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+form input:focus {
+  border: none;
+  outline: none;
+  transform: translateY(-10px);
+}
+
+section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+/* section .icon{
+  width: 20%;
+
+}
+section .icon img{
+  width: 100%;
+  height: auto;
+} */
+ section .display{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+ }
+ section img{
+  border-radius: 1rem;
+  margin: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+ }
+section .desc {
+  width: 100%;
+  margin-top: 3rem;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+section .temp{
+  width: 100%;
+}
+section .temp p{
+
+  font-size: 1.5rem;
+  color: var(--danger-color);
+}
+section .sun {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+section .sun span {
+  color: yellow;
+}
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
