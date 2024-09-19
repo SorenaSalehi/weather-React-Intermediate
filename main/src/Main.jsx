@@ -66,7 +66,7 @@ export default function Main() {
             return;
           }
           const res = await fetch(
-            `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${KEY}`
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${KEY}`
           );
           if (!res) throw new Error(res.message);
           const data = await res.json();
@@ -148,7 +148,7 @@ export default function Main() {
           }
           setIsLoading(true);
           const res = await fetch(
-            `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${KEY}`,
+            `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${KEY}`,
             { signal }
           );
           const data = await res.json();
@@ -193,7 +193,7 @@ export default function Main() {
           if (!newLat || !newLon) return;
           setIsLoading(true);
           const res = await fetch(
-            `http://api.openweathermap.org/data/2.5/forecast?lat=${newLat}&lon=${newLon}&appid=${KEY}`
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${newLat}&lon=${newLon}&appid=${KEY}`
           );
           const data = await res.json();
 
