@@ -64,6 +64,7 @@ export default function Main() {
         } catch (err) {
           console.error(err);
           setError(err.message);
+          console.log(error)
         }
       }
       fetchWeather();
