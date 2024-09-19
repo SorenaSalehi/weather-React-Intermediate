@@ -27,7 +27,7 @@ body {
 }
 
 main {
-  width:500px;
+  width: 500px;
   min-width: 300px;
   height: 90dvh;
   display: flex;
@@ -116,12 +116,17 @@ footer {
   display: flex;
   justify-content: space-around;
 }
-@media screen and (max-width:480px) {
-  main{
+
+.loading,
+.error {
+  color: var(--danger-color);
+}
+@media screen and (max-width: 480px) {
+  main {
     width: 100%;
     height: 70dvh;
   }
-  section .desc{
+  section .desc {
     font-size: 1.5rem;
   }
 }

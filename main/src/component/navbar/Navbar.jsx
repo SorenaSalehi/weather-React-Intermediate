@@ -4,7 +4,7 @@ export default function Navbar({ query, setQuery, onCityName, isLoading }) {
       onSubmit={(e) => {
         e.preventDefault();
         onCityName(query);
-        console.log(e.target.value);
+        setQuery('')
       }}
     >
       <input
