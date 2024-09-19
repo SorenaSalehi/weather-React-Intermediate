@@ -7,7 +7,7 @@ const KEY = "a8d00e8852085aa1237b5d745e484172";
 
 export default function Main() {
   const [coords, setCoords] = useState({ lat: null, lon: null });
-  const [cityName, setCityName] = useState(" ");
+  const [cityName, setCityName] = useState({city:'',state:'',country:''});
   const [weather, setWeather] = useState("");
   const [query, setQuery] = useState("");
   const [SearchedCity, setSearchedCity] = useState({});
@@ -86,8 +86,8 @@ export default function Main() {
         if (data) {
           // console.log("city details", data);
           setCityName({
-            state: data.address.state.split(" ")[0],
-            city: data.address.city.split(" ")[0],
+            state: data.address.state?.split(" ")[0],
+            city: data.address.city?.split(" ")[0],
             country: data.address.country,
           });
         }
@@ -106,7 +106,7 @@ export default function Main() {
 
       async function getCoordsByAddress() {
         try {
-          if (!query) return;
+          if (!query || query.length < 4) return;
           const res = await fetch(
             `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${KEY}`,
             { signal }
@@ -248,7 +248,7 @@ function Header({ cityName, state, city, country, isLoading }) {
   return (
     <header>
       {isLoading && <p>is Loading </p>}
-      {!isLoading && `${city},${state ? state : ""} ${country}`}
+      {!isLoading && `${city ? city : ''} ${state ? state : ""} ${country}`}
     </header>
   );
 }

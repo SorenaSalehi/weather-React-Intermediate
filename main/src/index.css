@@ -25,12 +25,9 @@ body {
     rgba(80, 118, 135, 1) 49%
   );
 }
-header {
-  font-size: 2rem;
-}
 
 main {
-  width: 500px;
+  width:500px;
   min-width: 300px;
   height: 90dvh;
   display: flex;
@@ -42,7 +39,9 @@ main {
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-
+header {
+  font-size: 2rem;
+}
 form input {
   color: #fff;
   padding: 1rem;
@@ -79,30 +78,28 @@ section .icon img{
   width: 100%;
   height: auto;
 } */
- section .display{
+section .display {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: nowrap;
- }
- section img{
+}
+section img {
   border-radius: 1rem;
   margin: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
- }
+}
 section .desc {
-  width: 100%;
+  width: calc(100% - 0.5rem);
   margin-top: 3rem;
   font-size: 2.5rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
-section .temp{
+section .temp {
   width: 100%;
 }
-section .temp p{
-
+section .temp p {
   font-size: 1.5rem;
   color: var(--danger-color);
 }
@@ -118,4 +115,13 @@ footer {
   width: 100%;
   display: flex;
   justify-content: space-around;
+}
+@media screen and (max-width:480px) {
+  main{
+    width: 100%;
+    height: 70dvh;
+  }
+  section .desc{
+    font-size: 1.5rem;
+  }
 }
