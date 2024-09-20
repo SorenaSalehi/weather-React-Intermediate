@@ -19,11 +19,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
-    90deg,
-    rgba(56, 75, 112, 1) 0%,
-    rgba(80, 118, 135, 1) 49%
-  );
+  color: var(--primary-color);
+  background-image: url(/public/bg2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 main {
@@ -37,25 +37,38 @@ main {
   padding: 1rem;
   margin: 5dvh 0;
   border-radius: 1rem;
+  background-color: rgb(255,255,255,0.3);
+  backdrop-filter: blur(10px);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 header {
   font-size: 2rem;
 }
-form input {
+form {
   color: #fff;
   padding: 1rem;
   border-radius: 1rem;
   background-color: transparent;
-  border: none;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+form input,button{
+  margin: 0.1rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  border: none;
+  color: #fff;
+  background-color: var(--primary-color);
   transition: all 0.5s;
   cursor: pointer;
 }
-form input:hover {
+form input:hover,button:hover {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+form button:active{
+  color: var(--danger-color);
+  background-color: var(--secondary-color);
 }
 form input:focus {
   border: none;
@@ -70,14 +83,7 @@ section {
   justify-content: space-between;
   align-items: center;
 }
-/* section .icon{
-  width: 20%;
 
-}
-section .icon img{
-  width: 100%;
-  height: auto;
-} */
 section .display {
   display: flex;
   justify-content: space-evenly;
@@ -86,6 +92,7 @@ section .display {
 section img {
   border-radius: 1rem;
   margin: 0.5rem;
+  background-color: var(--secondary-color);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 section .desc {
@@ -118,8 +125,8 @@ footer {
 }
 
 .loading,
-.error {
-  color: var(--danger-color);
+.error ,h1{
+  color: var(--primary-color);
 }
 @media screen and (max-width: 480px) {
   main {

@@ -5,12 +5,11 @@ export default function Section({
   sunrise,
   sunset,
   isLoading,
+  error
 }) {
   return (
     <section>
-      {isLoading ? (
-        <div>🤔</div>
-      ) : (
+      {!isLoading && !error && (
         <div className="display">
           <img
             src={`http://openweathermap.org/img/wn/${icon}.png`}
@@ -23,9 +22,7 @@ export default function Section({
         </div>
       )}
       <div className="desc">
-        {isLoading ? (
-          <h1>please wait</h1>
-        ) : (
+        {!isLoading && !error && (
           <>
             <div className="sun">
               <p>

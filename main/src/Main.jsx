@@ -6,7 +6,10 @@ import DailyWeather from "./component/footer/DailyWeather";
 const KEY = "a8d00e8852085aa1237b5d745e484172";
 
 export default function Main() {
-  const [coords, setCoords] = useState({ lat: null, lon: null });
+  const [coords, setCoords] = useState({
+    lat: "42.34911170252585",
+    lon: "-7.898225243231444",
+  });
   const [cityName, setCityName] = useState({
     city: "",
     state: "",
@@ -22,8 +25,9 @@ export default function Main() {
   const { lat, lon } = coords;
   const { state, city, country } = cityName;
   const { sunrise, sunset } = sun;
-  const Temperature = weather && weather.list[0]?.main.temp;
-  const { description, icon } = weather && weather.list[0]?.weather[0];
+  const Temperature = weather?.list?.[0]?.main?.temp ?? "N/A";
+  const { description = "no Description", icon = "🤔" } =
+    weather?.list?.[0]?.weather[0] || [];
   // console.log("city name:", cityName);
   // console.log("weather:", weather);
   // console.log("sun:", sun);
@@ -63,6 +67,7 @@ export default function Main() {
         try {
           if (!lat || !lon) {
             setError("Coordinates not Available !");
+            setIsLoading(false);
             return;
           }
           const res = await fetch(
@@ -100,7 +105,11 @@ export default function Main() {
     function () {
       async function fetchCityName() {
         setIsLoading(true);
-        if (!lat || !lon) return;
+        if (!lat || !lon) {
+          setError("Something went wrong !");
+          setIsLoading(false);
+          return;
+        }
         try {
           const res = await fetch(
             `https://us1.locationiq.com/v1/reverse?key=pk.d91f88ff4d19bf8dada031715a6889ab&lat=${lat}&lon=${lon}&format=json&`
@@ -140,26 +149,32 @@ export default function Main() {
       const signal = controller.signal;
 
       async function getCoordsByAddress() {
+        setIsLoading(true);
+
+        if (!query || query.length < 4) {
+          setCoords({ lat: null, lon: null });
+          setIsLoading(false);
+          return;
+        }
         try {
-          if (!query || query.length < 4) {
-            setCoords({ lat: null, lon: null });
-            setIsLoading(false);
-            return;
-          }
-          setIsLoading(true);
           const res = await fetch(
             `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${KEY}`,
             { signal }
           );
+          console.log(res);
           const data = await res.json();
-
-          if (!data || data.length === 0) {
-            setCoords({ lat: null, lon: null });
+          console.log(data);
+          if (!data || data.length < 1) {
+            setCoords({});
+            setWeather({});
+            setCityName({});
+            setQuery("");
+            setSearchedCity({});
+            setSun({});
             setError("Address not Found ,Please Try Again :)");
+            setIsLoading(false);
           }
           if (data) {
-            // console.log("query:", data);
-
             setSearchedCity({ newLat: data[0]?.lat, newLon: data[0]?.lon });
             setError("");
           }
@@ -167,8 +182,6 @@ export default function Main() {
           if (err.name === "AbortError") {
             console.error("Fetch aborted");
           } else {
-            setIsLoading(false);
-
             console.error(err.message);
             setError(err.message);
           }
@@ -191,17 +204,11 @@ export default function Main() {
         setIsLoading(true);
         try {
           if (!newLat || !newLon) return;
-          setIsLoading(true);
           const res = await fetch(
             `https://api.openweathermap.org/data/2.5/forecast?lat=${newLat}&lon=${newLon}&appid=${KEY}`
           );
           const data = await res.json();
 
-          // if(!data){
-          //   setError('Something Went Wrong , Please Try Again :)')
-          //   setSun({sunrise:''});
-          //   setWeather("");
-          // }
           if (data) {
             console.log("new coords:", data);
             setWeather(data);
@@ -209,11 +216,12 @@ export default function Main() {
               sunrise: handleConversionUTC(data.city.sunrise),
               sunset: handleConversionUTC(data.city.sunset),
             });
-            setIsLoading(false);
           }
         } catch (err) {
           console.log(err);
           setError(err.message);
+        } finally {
+          setIsLoading(false);
         }
       }
       fetchWeatherByQuery();
@@ -241,12 +249,12 @@ export default function Main() {
               country: data.address?.country,
               city: data.address?.city,
             });
-
-            setIsLoading(false);
           }
         } catch (err) {
           console.log(err.message);
           // setError(err.message);
+        } finally {
+          setIsLoading(false);
         }
       }
       fetchAddressByDetails();
@@ -263,6 +271,7 @@ export default function Main() {
   }
 
   function handleCityName(query) {
+    if (query === "") return;
     setQuery(query);
   }
 
@@ -283,6 +292,7 @@ export default function Main() {
         error={error}
       />
       <Section
+        error={error}
         description={description}
         icon={icon}
         Temperature={Temperature}
