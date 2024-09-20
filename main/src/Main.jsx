@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "./component/navbar/Navbar";
 import Section from "./component/section/Section";
-import Footer from "./component/footer/Footer";
-import DailyWeather from "./component/footer/DailyWeather";
+
 const KEY = "a8d00e8852085aa1237b5d745e484172";
 
 export default function Main() {
@@ -300,9 +299,7 @@ export default function Main() {
         sunset={sunset}
         isLoading={isLoading}
       />
-      <Footer>
-        <DailyWeather />
-      </Footer>
+     
       <p className="sorena">
         practice after finished React intermediate By
         <a href={`https://www.linkedin.com/in/sorenasalehi/`}>
