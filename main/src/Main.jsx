@@ -5,9 +5,10 @@ import Section from "./component/section/Section";
 const KEY = "a8d00e8852085aa1237b5d745e484172";
 
 export default function Main() {
+
   const [coords, setCoords] = useState({
-    lat: "42.34911170252585",
-    lon: "-7.898225243231444",
+    lat: "",
+    lon: "",
   });
   const [cityName, setCityName] = useState({
     city: "",
@@ -37,6 +38,7 @@ export default function Main() {
   useEffect(function () {
     async function currentPosition() {
       setIsLoading(true);
+      setError('please wait ... ')
       try {
         navigator.geolocation.getCurrentPosition(
           function success(position) {
@@ -44,12 +46,13 @@ export default function Main() {
             // console.log("current position:", pos);
             setCoords({ lat: pos.latitude, lon: pos.longitude });
             setError("");
+        setIsLoading(false);
+
           },
           function error(err) {
             setError(err.message);
           }
         );
-        setIsLoading(false);
       } catch (err) {
         console.error(err);
         setError(err.message);
@@ -65,7 +68,6 @@ export default function Main() {
         setIsLoading(true);
         try {
           if (!lat || !lon) {
-            setError("Coordinates not Available !");
             setIsLoading(false);
             return;
           }
@@ -105,7 +107,6 @@ export default function Main() {
       async function fetchCityName() {
         setIsLoading(true);
         if (!lat || !lon) {
-          setError("Something went wrong !");
           setIsLoading(false);
           return;
         }

@@ -146,12 +146,14 @@ h1 {
 @media screen and (max-width: 580px) {
   form {
     flex-direction: column;
+    width: 70%;
   }
   form input {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
+    text-align: center;
   }
   form button {
-    font-size: 1rem;
+    font-size: 0.6rem;
   }
   header {
     font-size: 2rem;
