@@ -110,24 +110,30 @@ section .display {
   font-size: 1.8rem;
   margin: 0.4rem;
 }
-
-section img {
+.display .icon{
+  width: 30%;
+  height: max-content;
   border-radius: 1rem;
   margin: 0.5rem;
   background-color: var(--secondary-color);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-section .desc {
-  width: 100%;
-  margin-top: 3rem;
-  font-size: 4.5rem;
+
+section img {
+ width: 100%;
+ height: auto;
 }
+
 section .temp {
-  width: 100%;
+  width: 70%;
 }
-section .temp p {
-  font-size: 1.5rem;
+section .temp h2{
   color: var(--danger-color);
+}
+section .desc {
+  width: 90%;
+  margin-top: 1dvh;
+  font-size: 4.5dvw;
 }
 section .sun {
   width: 100%;

@@ -13,7 +13,7 @@ export default function Navbar({ query, setQuery, onCityName, isLoading }) {
       <input
         type="text"
         placeholder="Search for City's Weather"
-        // disabled={isLoading}
+        autoFocus
         value={localQuery}
         onChange={(e)=> setLocalQuery(e.target.value)}
         disabled={isLoading}

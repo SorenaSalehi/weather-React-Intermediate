@@ -5,19 +5,23 @@ export default function Section({
   sunrise,
   sunset,
   isLoading,
-  error
+  error,
 }) {
   return (
     <section>
       {!isLoading && !error && (
         <div className="display">
-          <img
-            src={`https://openweathermap.org/img/wn/${icon}.png`}
-            alt={description}
-          ></img>
+          <div className="icon">
+            <img
+              src={`https://openweathermap.org/img/wn/${icon}.png`}
+              alt={description}
+            ></img>
+          </div>
           <div className="temp">
-            <p>{Math.round(Temperature - 273.15)} c</p>
-            <h2>{description}</h2>
+            <h2>{Math.round(Temperature - 273.15)} c</h2>
+          </div>
+          <div>
+            <h4>{description}</h4>
           </div>
         </div>
       )}

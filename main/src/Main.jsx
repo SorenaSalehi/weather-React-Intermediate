@@ -28,11 +28,7 @@ export default function Main() {
   const Temperature = weather?.list?.[0]?.main?.temp ?? "N/A";
   const { description = "no Description", icon = "🤔" } =
     weather?.list?.[0]?.weather[0] || [];
-  // console.log("city name:", cityName);
-  // console.log("weather:", weather);
-  // console.log("sun:", sun);
-  // console.log('temp:',Temperature)
-  // console.log(description,icon)
+
 
   //current position on mount
   useEffect(function () {
@@ -43,7 +39,6 @@ export default function Main() {
         navigator.geolocation.getCurrentPosition(
           function success(position) {
             const pos = position.coords;
-            // console.log("current position:", pos);
             setCoords({ lat: pos.latitude, lon: pos.longitude });
             setError("");
         setIsLoading(false);
@@ -54,7 +49,6 @@ export default function Main() {
           }
         );
       } catch (err) {
-        console.error(err);
         setError(err.message);
       }
     }
@@ -76,7 +70,6 @@ export default function Main() {
           );
           if (!res) throw new Error(res.message);
           const data = await res.json();
-          // console.log(data);
           if (!data) {
             setError("Weather Data not Fount !");
           }
@@ -91,7 +84,6 @@ export default function Main() {
             setIsLoading(false);
           }
         } catch (err) {
-          console.error(err);
           setError(err.message);
         }
       }
@@ -122,7 +114,6 @@ export default function Main() {
           }
 
           if (data) {
-            // console.log("city details", data);
             setCityName({
               state: data.address?.state?.split(" ")[0],
               city: data.address?.city?.split(" ")[0],
@@ -133,7 +124,6 @@ export default function Main() {
             setIsLoading(false);
           }
         } catch (err) {
-          console.error(err);
           setError(err.message);
         }
       }
@@ -145,25 +135,15 @@ export default function Main() {
   //get coords by Address open weather api
   useEffect(
     function () {
-      const controller = new AbortController();
-      const signal = controller.signal;
+      
 
       async function getCoordsByAddress() {
         setIsLoading(true);
-
-        if (!query || query.length < 4) {
-          setCoords({ lat: null, lon: null });
-          setIsLoading(false);
-          return;
-        }
         try {
           const res = await fetch(
-            `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${KEY}`,
-            { signal }
+            `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${KEY}`
           );
-          console.log(res);
           const data = await res.json();
-          console.log(data);
           if (!data || data.length < 1) {
             setCoords({});
             setWeather({});
@@ -180,9 +160,7 @@ export default function Main() {
           }
         } catch (err) {
           if (err.name === "AbortError") {
-            console.error("Fetch aborted");
           } else {
-            console.error(err.message);
             setError(err.message);
           }
         } finally {
@@ -190,9 +168,7 @@ export default function Main() {
         }
       }
       getCoordsByAddress();
-      // return function () {
-      //   controller.abort();
-      // };
+     
     },
     [query]
   );
@@ -210,7 +186,6 @@ export default function Main() {
           const data = await res.json();
 
           if (data) {
-            console.log("new coords:", data);
             setWeather(data);
             setSun({
               sunrise: handleConversionUTC(data.city.sunrise),
@@ -218,7 +193,6 @@ export default function Main() {
             });
           }
         } catch (err) {
-          console.log(err);
           setError(err.message);
         } finally {
           setIsLoading(false);
@@ -244,14 +218,12 @@ export default function Main() {
             setError("Something Went Wrong , Please Try Again :)");
           }
           if (data) {
-            console.log("new address:", data);
             setCityName({
               country: data.address?.country,
               city: data.address?.city,
             });
           }
         } catch (err) {
-          console.log(err.message);
           // setError(err.message);
         } finally {
           setIsLoading(false);
